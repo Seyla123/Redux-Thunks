@@ -5,24 +5,24 @@ const authSlice = createSlice({
   name: "auth",
   initialState: {
     user: null,
-    isLoading: false,
-    error: null,
+    isCreatingUser: false,
+    creatingUserError: null,
     signUpSuccess: false,
   },
   extraReducers: (builder) => {
     builder.addCase(signUp.pending, (state) => {
-      state.isLoading = true;
-      state.error = null;
+      state.isCreatingUser = true;
+      state.creatingUserError = null;
       state.signUpSuccess = false;
     });
     builder.addCase(signUp.fulfilled, (state, action) => {
-      state.isLoading = false;
+      state.isCreatingUser = false;
       state.signUpSuccess = true;
       state.user = action.payload;
     });
     builder.addCase(signUp.rejected, (state, action) => {
-      state.isLoading = false;
-      state.error = action.payload;
+      state.isCreatingUser = false;
+      state.creatingUserError = action.payload;
       state.signUpSuccess = false;
     });
   },
